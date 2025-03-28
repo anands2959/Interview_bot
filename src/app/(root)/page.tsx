@@ -40,7 +40,7 @@ async function Home() {
           alt="robo-dude"
           width={350}
           height={300}
-          className="max-sm:hidden hover:scale-105 transition-transform duration-300"
+          className="max-sm:hidden hover:scale-105 transition-transform duration-300 animate-float"
         />
       </section>
 
