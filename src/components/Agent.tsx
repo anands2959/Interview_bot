@@ -152,10 +152,9 @@ const Agent = ({
         <div className="card-interviewer">
           <div className="avatar">
             <Image
-              src="/ai-avatar.png"
+              src="/ai.png"
               alt="profile-image"
-              width={65}
-              height={54}
+              fill
               className="object-cover"
             />
             {isSpeaking && <span className="animate-speak" />}
@@ -167,7 +166,7 @@ const Agent = ({
         <div className="card-border">
           <div className="card-content">
             <Image
-              src="/user-avatar.png"
+              src="/profile.svg"
               alt="profile-image"
               width={539}
               height={539}
@@ -206,8 +205,8 @@ const Agent = ({
 
             <span className="relative">
               {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                ? "Call"
-                : ". . ."}
+                ? "Start"
+                : ". . . ."}
             </span>
           </button>
         ) : (

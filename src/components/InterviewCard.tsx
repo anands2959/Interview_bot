@@ -28,18 +28,18 @@ const InterviewCard = async ({
 
   const badgeColor =
     {
-      Behavioral: "bg-light-400",
-      Mixed: "bg-light-600",
-      Technical: "bg-light-800",
-    }[normalizedType] || "bg-light-600";
+      Behavioral: "bg-gradient-to-r from-emerald-500 to-teal-600",
+      Mixed: "bg-gradient-to-r from-violet-500 to-purple-600",
+      Technical: "bg-gradient-to-r from-blue-500 to-indigo-600",
+    }[normalizedType] || "bg-gradient-to-r from-violet-500 to-purple-600";
 
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D, YYYY");
 
   return (
-    <div className="card-border w-[360px] max-sm:w-full min-h-96">
-      <div className="card-interview">
+    <div className="card-border w-[360px] max-sm:w-full min-h-96 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800/60 hover:to-slate-900/60 transition-all duration-300">
+      <div className="card-interview bg-gradient-to-br from-slate-800/30 to-slate-900/30">
         <div>
           {/* Type Badge */}
           <div
@@ -61,7 +61,7 @@ const InterviewCard = async ({
           />
 
           {/* Interview Role */}
-          <h3 className="mt-5 capitalize">{role} Interview</h3>
+          <h3 className="mt-5 capitalize text-2xl font-semibold bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent">{role} Interview</h3>
 
           {/* Date & Score */}
           <div className="flex flex-row gap-5 mt-3">
@@ -91,7 +91,7 @@ const InterviewCard = async ({
         <div className="flex flex-row justify-between">
           <DisplayTechIcons techStack={techstack} />
 
-          <Button className="btn-primary">
+          <Button className="btn-primary bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-300">
             <Link
               href={
                 feedback

@@ -98,19 +98,20 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="card-border lg:min-w-[566px]">
-      <div className="flex flex-col gap-6 card py-14 px-10">
-        <div className="flex flex-row gap-2 justify-center">
-          <Image src="/logo.svg" alt="logo" height={32} width={38} />
-          <h2 className="text-primary-100">PrepWise</h2>
+    <div className="card-border lg:min-w-[566px] backdrop-blur-sm">
+      <div className="flex flex-col gap-8 card py-16 px-12 bg-gradient-to-br from-slate-800/40 to-slate-900/40 hover:from-slate-800/50 hover:to-slate-900/50 transition-all duration-300">
+        <div className="flex flex-col items-center gap-6 text-center">
+          <div className="flex flex-row gap-3 items-center">
+            <Image src="/brand-logo.png" alt="logo" height={38} width={44} className="drop-shadow-lg" />
+            <h2 className="text-primary-100 tracking-wide font-semibold">NextHire</h2>
+          </div>
+          <h3 className="text-light-100 font-medium tracking-wide">Practice job interviews with AI</h3>
         </div>
-
-        <h3>Practice job interviews with AI</h3>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 mt-4 form"
+            className="w-full space-y-7 mt-6 form"
           >
             {!isSignIn && (
               <FormField
@@ -138,17 +139,17 @@ const AuthForm = ({ type }: { type: FormType }) => {
               type="password"
             />
 
-            <Button className="btn" type="submit">
+            <Button className="btn w-full" type="submit">
               {isSignIn ? "Sign In" : "Create an Account"}
             </Button>
           </form>
         </Form>
 
-        <p className="text-center">
+        <p className="text-center text-light-100">
           {isSignIn ? "No account yet?" : "Have an account already?"}
           <Link
             href={!isSignIn ? "/sign-in" : "/sign-up"}
-            className="font-bold text-user-primary ml-1"
+            className="font-semibold text-primary-100 hover:text-primary-50 transition-colors ml-1"
           >
             {!isSignIn ? "Sign In" : "Sign Up"}
           </Link>

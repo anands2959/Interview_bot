@@ -201,11 +201,11 @@
     }
 
     .input {
-      @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100;
+      @apply bg-dark-200/80 border border-input/30 rounded-lg px-4 py-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200/50 focus-visible:ring-offset-1 focus-visible:border-primary-200/30 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200;
     }
 
     .btn {
-      @apply !w-full !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+      @apply inline-flex items-center justify-center rounded-full text-sm font-semibold ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200/50 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 h-11 px-6 py-2 bg-primary-200 text-dark-100 hover:bg-primary-200/90 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98];
     }
   }
 
@@ -266,11 +266,13 @@
   }
 
   .card-cta {
-    @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
+    @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4 shadow-lg transition-all duration-300 hover:shadow-2xl;
+    animation: fadeIn 0.6s ease-out;
   }
 
   .interviews-section {
     @apply flex flex-wrap gap-4 max-lg:flex-col w-full items-stretch;
+    animation: gridFadeIn 0.8s ease-out;
   }
 
   .interview-text {
