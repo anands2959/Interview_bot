@@ -26,12 +26,12 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="card-cta backdrop-blur-sm bg-gradient-to-br from-slate-800/40 to-slate-900/40 hover:from-slate-800/50 hover:to-slate-900/50 bg-opacity-90 hover:bg-opacity-100 transition-all duration-300 max-w-2xl w-full text-center p-8 rounded-2xl">
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col w-full items-center gap-8">
           <Image
             src="/robot.png"
             alt="404 Robot"
-            width={200}
-            height={200}
+            width={300}
+            height={300}
             className="hover:scale-105 transition-transform duration-300"
           />
           

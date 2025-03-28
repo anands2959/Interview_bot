@@ -38,8 +38,8 @@ async function Home() {
         <Image
           src="/robot.png"
           alt="robo-dude"
-          width={400}
-          height={400}
+          width={350}
+          height={300}
           className="max-sm:hidden hover:scale-105 transition-transform duration-300"
         />
       </section>
