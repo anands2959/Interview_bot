@@ -1,6 +1,7 @@
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Mona_Sans } from "next/font/google";
+import Footer from "@/components/Footer";
 
 import "./globals.css";
 
@@ -21,9 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${monaSans.className} antialiased pattern`}>
-        {children}
+      <body className={`${monaSans.className} antialiased pattern min-h-screen flex flex-col`}>
+        <div className="flex-grow">
+          {children}
+        </div>
 
+        <Footer />
         <Toaster />
       </body>
     </html>
