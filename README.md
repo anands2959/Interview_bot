@@ -26,6 +26,8 @@ An intelligent interview preparation platform powered by AI that provides real-t
 - Node.js (Latest LTS version recommended)
 - npm or yarn package manager
 - Firebase account and project setup
+- VAPI AI account
+- Google Cloud account with Generative AI API enabled
 
 ## Installation 🚀
 
@@ -41,19 +43,28 @@ npm install
 ```
 
 3. Set up environment variables:
-Create a `.env` file in the root directory with your Firebase and VAPI AI configurations:
+Create a `.env.local` file in the root directory with the following configurations:
 
 ```env
-# Firebase Config
-FIREBASE_API_KEY=your_api_key
-FIREBASE_AUTH_DOMAIN=your_auth_domain
-FIREBASE_PROJECT_ID=your_project_id
-FIREBASE_STORAGE_BUCKET=your_storage_bucket
-FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-FIREBASE_APP_ID=your_app_id
+# VAPI AI Configuration
+NEXT_PUBLIC_VAPI_WEB_TOKEN=your_vapi_web_token
+NEXT_PUBLIC_VAPI_WORKFLOW_ID=your_workflow_id
 
-# VAPI AI Config
-VAPI_API_KEY=your_vapi_api_key
+# Google Generative AI Configuration
+GOOGLE_GENERATIVE_AI_API_KEY=your_generative_ai_api_key
+
+# Firebase Client Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+
+# Firebase Admin Configuration
+FIREBASE_PROJECT_ID=your_firebase_project_id
+FIREBASE_CLIENT_EMAIL=your_firebase_client_email
+FIREBASE_PRIVATE_KEY="your_firebase_private_key"
 ```
 
 ## Available Scripts 📜
