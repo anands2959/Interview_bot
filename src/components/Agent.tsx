@@ -215,12 +215,12 @@ const Agent = ({
         {messages.length > 0 && (
           <div className="bg-gradient-to-br from-slate-800/30 to-slate-900/30 rounded-2xl p-6 backdrop-blur-lg border border-gray-700/50 shadow-xl">
             <div className="prose prose-invert max-w-none">
-              <p className="text-gray-300 leading-relaxed animate-fadeIn">
+              <p className="text-gray-300 text-center leading-relaxed animate-fadeIn">
                 {lastMessage}
               </p>
             </div>
           </div>
-        )}
+         )} 
 
         {/* Control Buttons */}
         <div className="flex justify-center pt-4">
