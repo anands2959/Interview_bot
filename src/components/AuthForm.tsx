@@ -98,62 +98,68 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="card-border lg:min-w-[566px] backdrop-blur-sm">
-      <div className="flex flex-col gap-8 card py-16 px-12 bg-gradient-to-br from-slate-800/40 to-slate-900/40 hover:from-slate-800/50 hover:to-slate-900/50 transition-all duration-300">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <div className="flex flex-row gap-3 items-center">
-            <Image src="/brand-logo.png" alt="logo" height={38} width={44} className="drop-shadow-lg" />
-            <h2 className="text-primary-100 tracking-wide font-semibold">NextHire</h2>
+    <div className="relative w-full max-w-md mx-auto p-1 rounded-2xl bg-gradient-to-r from-cyan-500/30 to-blue-500/30">
+      <div className="relative overflow-hidden rounded-xl backdrop-blur-xl bg-slate-900/50 p-8 shadow-xl border border-slate-800/50">
+        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-blue-500/10 pointer-events-none" />
+        
+        <div className="relative flex flex-col items-center gap-6 mb-8">
+          <div className="flex items-center gap-3 p-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50">
+            <Image src="/brand-logo.png" alt="logo" height={32} width={32} className="drop-shadow-lg" />
+            <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-300 to-blue-300 text-transparent bg-clip-text">NextHire</h2>
           </div>
-          <h3 className="text-light-100 font-medium tracking-wide">Practice job interviews with AI</h3>
+          <h3 className="text-slate-300 text-lg font-medium">Practice job interviews with AI</h3>
         </div>
-
+    
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-7 mt-6 form"
-          >
-            {!isSignIn && (
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <div className="space-y-4">
+              {!isSignIn && (
+                <FormField
+                  control={form.control}
+                  name="name"
+                  label="Name"
+                  placeholder="Your Name"
+                  type="text"
+                />
+              )}
+    
               <FormField
                 control={form.control}
-                name="name"
-                label="Name"
-                placeholder="Your Name"
-                type="text"
+                name="email"
+                label="Email"
+                placeholder="Your email address"
+                type="email"
               />
-            )}
-
-            <FormField
-              control={form.control}
-              name="email"
-              label="Email"
-              placeholder="Your email address"
-              type="email"
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-            />
-
-            <Button className="btn w-full" type="submit">
-              {isSignIn ? "Sign In" : "Create an Account"}
+    
+              <FormField
+                control={form.control}
+                name="password"
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+              />
+            </div>
+    
+            <Button 
+              type="submit"
+              className="w-full h-11 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+            >
+              {isSignIn ? "Sign In" : "Create Account"}
             </Button>
           </form>
         </Form>
-
-        <p className="text-center text-light-100">
-          {isSignIn ? "No account yet?" : "Have an account already?"}
-          <Link
-            href={!isSignIn ? "/sign-in" : "/sign-up"}
-            className="font-semibold text-primary-100 hover:text-primary-50 transition-colors ml-1"
-          >
-            {!isSignIn ? "Sign In" : "Sign Up"}
-          </Link>
-        </p>
+    
+        <div className="mt-6 text-center">
+          <p className="text-slate-400">
+            {isSignIn ? "No account yet?" : "Have an account already?"}
+            <Link
+              href={!isSignIn ? "/sign-in" : "/sign-up"}
+              className="ml-1 font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              {!isSignIn ? "Sign In" : "Sign Up"}
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
