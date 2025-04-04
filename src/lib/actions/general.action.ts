@@ -104,11 +104,16 @@ export async function getLatestInterviews(
   try {
     const { userId, limit = 20 } = params;
 
+    // Return empty array if userId is undefined
+    if (!userId) {
+      return [];
+    }
+
     const interviews = await db
       .collection("interviews")
       .where("finalized", "==", true)
-      .where("userId", "!=", userId) // Firestore requires composite index for "!="
-      .orderBy("userId") // Must order by userId when using "!="
+      .where("userId", "!=", userId)
+      .orderBy("userId")
       .orderBy("createdAt", "desc")
       .limit(limit)
       .get();
@@ -119,14 +124,19 @@ export async function getLatestInterviews(
     })) as Interview[];
   } catch (error) {
     console.error("Error fetching latest interviews:", error);
-    return null;
+    return [];
   }
 }
 
 export async function getInterviewsByUserId(
-  userId: string
-): Promise<Interview[] | null> {
+  userId: string | undefined
+): Promise<Interview[]> {
   try {
+    // Return empty array if userId is undefined
+    if (!userId) {
+      return [];
+    }
+
     const interviews = await db
       .collection("interviews")
       .where("userId", "==", userId)
@@ -140,6 +150,6 @@ export async function getInterviewsByUserId(
     })) as Interview[];
   } catch (error) {
     console.error("Error fetching interviews by user ID:", error);
-    return null;
+    return [];
   }
 }

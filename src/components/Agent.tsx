@@ -21,6 +21,16 @@ interface SavedMessage {
   content: string;
 }
 
+interface AgentProps {
+  userName: string;
+  userId: string | undefined;
+  interviewId?: string;
+  feedbackId?: string;
+  type: "generate" | "interview";
+  questions?: string[];
+  profileImage?: string;
+}
+
 const Agent = ({
   userName,
   userId,
@@ -28,6 +38,7 @@ const Agent = ({
   feedbackId,
   type,
   questions,
+  profileImage,
 }: AgentProps) => {
   const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
@@ -146,76 +157,104 @@ const Agent = ({
   };
 
   return (
-    <>
-      <div className="call-view">
-        {/* AI Interviewer Card */}
-        <div className="card-interviewer">
-          <div className="avatar">
-            <Image
-              src="/ai.png"
-              alt="profile-image"
-              fill
-              className="object-cover"
-            />
-            {isSpeaking && <span className="animate-speak" />}
+    <div className="bg-gradient-to-b from-slate-900 to-black p-6">
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* AI Interviewer Card */}
+          <div className="relative bg-gradient-to-br from-cyan-600/30 to-blue-600/30 rounded-2xl p-6 backdrop-blur-lg border border-gray-700/50 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex items-center space-x-6">
+              <div className="relative w-24 h-24 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 p-1">
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-gray-900">
+                  <Image
+                    src="/ai.png"
+                    alt="AI Interviewer"
+                    fill
+                    className="object-cover"
+                  />
+                  {isSpeaking && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 animate-pulse" />
+                  )}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">AI Interviewer</h3>
+                {isSpeaking && (
+                  <div className="flex space-x-1 mt-2">
+                    <div className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-          <h3>AI Interviewer</h3>
+
+          {/* User Profile Card */}
+          <div className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 rounded-2xl p-6 backdrop-blur-lg border border-gray-700/50 shadow-xl">
+            <div className="flex items-center space-x-6">
+              <div className="relative w-24 h-24 rounded-full bg-gradient-to-r from-slate-700 to-slate-600 p-1">
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-gray-900">
+                  <Image
+                    src="/profile.svg"
+                    alt="User Profile"
+                    width={96}
+                    height={96}
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-semibold text-gray-100">{userName}</h3>
+                <p className="text-gray-400 mt-1">{type === 'generate' ? 'Interview Generation' : 'Interview Session'}</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* User Profile Card */}
-        <div className="card-border">
-          <div className="card-content">
-            <Image
-              src="/profile.svg"
-              alt="profile-image"
-              width={539}
-              height={539}
-              className="rounded-full object-cover size-[120px]"
-            />
-            <h3>{userName}</h3>
+        {/* Transcript Section */}
+        {messages.length > 0 && (
+          <div className="bg-gradient-to-br from-slate-800/30 to-slate-900/30 rounded-2xl p-6 backdrop-blur-lg border border-gray-700/50 shadow-xl">
+            <div className="prose prose-invert max-w-none">
+              <p className="text-gray-300 leading-relaxed animate-fadeIn">
+                {lastMessage}
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
 
-      {messages.length > 0 && (
-        <div className="transcript-border">
-          <div className="transcript">
-            <p
-              key={lastMessage}
+        {/* Control Buttons */}
+        <div className="flex justify-center pt-4">
+          {callStatus !== CallStatus.ACTIVE ? (
+            <button
+              onClick={handleCall}
               className={cn(
-                "transition-opacity duration-500 opacity-0",
-                "animate-fadeIn opacity-100"
+                "relative px-8 py-3 text-lg font-medium rounded-full transition-all duration-300",
+                callStatus === CallStatus.CONNECTING
+                  ? "bg-gradient-to-r from-cyan-600/50 to-blue-600/50 text-gray-300 cursor-wait"
+                  : "bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:from-cyan-700 hover:to-blue-700 transform hover:scale-105"
               )}
             >
-              {lastMessage}
-            </p>
-          </div>
+              <span className={cn(
+                "absolute inset-0 rounded-full opacity-75",
+                callStatus === CallStatus.CONNECTING ? "animate-ping bg-gradient-to-r from-cyan-600/50 to-blue-600/50" : "hidden"
+              )} />
+              <span className="relative">
+                {callStatus === CallStatus.INACTIVE || callStatus === CallStatus.FINISHED
+                  ? "Start Interview"
+                  : "Connecting..."}
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={handleDisconnect}
+              className="px-8 py-3 text-lg font-medium rounded-full bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-500 hover:to-pink-500 transform hover:scale-105 transition-all duration-300"
+            >
+              End Interview
+            </button>
+          )}
         </div>
-      )}
-
-      <div className="w-full flex justify-center">
-        {callStatus !== "ACTIVE" ? (
-          <button className="relative btn-call" onClick={() => handleCall()}>
-            <span
-              className={cn(
-                "absolute animate-ping rounded-full opacity-75",
-                callStatus !== "CONNECTING" && "hidden"
-              )}
-            />
-
-            <span className="relative">
-              {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                ? "Start"
-                : ". . . ."}
-            </span>
-          </button>
-        ) : (
-          <button className="btn-disconnect" onClick={() => handleDisconnect()}>
-            End
-          </button>
-        )}
       </div>
-    </>
+    </div>
   );
 };
 
