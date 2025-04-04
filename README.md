@@ -1,4 +1,4 @@
-# AI Interview Bot 🤖
+# (Next Hire )AI Interview Bot 🤖
 
 An intelligent interview preparation platform powered by AI that provides real-time interview practice and instant feedback. Practice technical interviews, improve your skills, and boost your confidence with our AI-powered interview simulator.
 
